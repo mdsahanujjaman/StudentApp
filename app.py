@@ -1,56 +1,53 @@
-def calculate_percentage():
-    marks_obtained = float(input("Enter marks obtained: "))
-    total_marks = float(input("Enter total marks: "))
+import tkinter as tk
+from tkinter import messagebox
 
-    percentage = (marks_obtained / total_marks) * 100
-    print("Percentage:", percentage)
+def calculate():
+    try:
+        marks = float(entry_marks.get())
+        total = float(entry_total.get())
 
-    if percentage >= 90:
-        grade = "A"
-    elif percentage >= 75:
-        grade = "B"
-    elif percentage >= 60:
-        grade = "C"
-    else:
-        grade = "D"
+        if marks > total or marks < 0 or total <= 0:
+            messagebox.showerror("Error", "Invalid input values")
+            return
 
-    print("Grade:", grade)
+        percentage = (marks / total) * 100
 
-
-def calculate_grade_only():
-    marks = int(input("Enter marks (0–100): "))
-
-    if marks >= 90:
-        grade = "A"
-    elif marks >= 75:
-        grade = "B"
-    elif marks >= 60:
-        grade = "C"
-    else:
-        grade = "D"
-
-    print("Your Grade:", grade)
-
-
-def main_menu():
-    while True:
-        print("\n----- STUDENT GRADE CALCULATOR MENU -----")
-        print("1. Calculate Percentage & Grade")
-        print("2. Grade Only")
-        print("3. Exit")
-
-        choice = input("Enter your choice (1/2/3): ")
-
-        if choice == '1':
-            calculate_percentage()
-        elif choice == '2':
-            calculate_grade_only()
-        elif choice == '3':
-            print("Exiting program...")
-            break
+        # Grade logic
+        if percentage >= 90:
+            grade = "A"
+        elif percentage >= 75:
+            grade = "B"
+        elif percentage >= 60:
+            grade = "C"
         else:
-            print("Invalid choice. Please try again.")
+            grade = "D"
+
+        label_result.config(text=f"Percentage: {percentage:.2f}%\nGrade: {grade}")
+
+    except ValueError:
+        messagebox.showerror("Error", "Please enter valid numbers")
 
 
-# Run the menu
-main_menu()
+# GUI Window
+root = tk.Tk()
+root.title("Student Grade Calculator")
+root.geometry("350x300")
+
+# Labels
+tk.Label(root, text="Marks Obtained:").pack()
+entry_marks = tk.Entry(root)
+entry_marks.pack()
+
+tk.Label(root, text="Total Marks:").pack()
+entry_total = tk.Entry(root)
+entry_total.pack()
+
+# Button
+tk.Button(root, text="Calculate", command=calculate).pack(pady=10)
+
+# Result Label
+label_result = tk.Label(root, text="", font=("Arial", 12), fg="blue")
+label_result.pack()
+
+# Run GUI
+root.mainloop()
