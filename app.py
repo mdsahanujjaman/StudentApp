@@ -1,12 +1,17 @@
-marks = int(input("Enter marks (0–100): "))
+marks_obtained = float(input("Enter marks obtained: "))
+total_marks = float(input("Enter total marks: "))
 
-if marks >= 90:
+percentage = (marks_obtained / total_marks) * 100
+print("Percentage:", percentage)
+
+# Grade calculation based on percentage
+if percentage >= 90:
     grade = "A"
-elif marks >= 75:
+elif percentage >= 75:
     grade = "B"
-elif marks >= 60:
+elif percentage >= 60:
     grade = "C"
 else:
     grade = "D"
 
-print("Your Grade:", grade)
+print("Grade:", grade)
