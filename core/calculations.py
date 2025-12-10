@@ -28,7 +28,7 @@ def calculate_gpa(subject_grades):
     """
     subject_grades = list of grades A, B, C, D
     GPA Mapping:
-        A = 4.0
+        A = 5.0
         B = 3.0
         C = 2.0
         D = 1.0
